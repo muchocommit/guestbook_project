@@ -32,10 +32,10 @@ class Conference
         $this->comments = new ArrayCollection();
     }
 
-//    public function __toString(): string
-//    {
-//        return $this->city . ' ' . $this->year;
-//    }
+    public function __toString(): string
+    {
+        return $this->city . ' ' . $this->year;
+    }
 
   public function getId(): ?int
     {
@@ -47,7 +47,7 @@ class Conference
         return $this->city;
     }
 
-    public function setCity(string $city): static
+    public function setCity(string $city): self
     {
         $this->city = $city;
 
@@ -59,7 +59,7 @@ class Conference
         return $this->year;
     }
 
-    public function setYear(string $year): static
+    public function setYear(string $year): self
     {
         $this->year = $year;
 
@@ -71,7 +71,7 @@ class Conference
         return $this->isInternational;
     }
 
-    public function setIsInternational(bool $isInternational): static
+    public function setIsInternational(bool $isInternational): self
     {
         $this->isInternational = $isInternational;
 
@@ -86,17 +86,17 @@ class Conference
         return $this->comments;
     }
 
-    public function addComment(Comment $comment): static
+    public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
-            $this->comments->add($comment);
+            $this->comments[] = $comment;
             $comment->setConference($this);
         }
 
         return $this;
     }
 
-    public function removeComment(Comment $comment): static
+    public function removeComment(Comment $comment): self
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)

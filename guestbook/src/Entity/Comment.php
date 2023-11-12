@@ -28,7 +28,10 @@ class Comment
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Conference $conference = null;
+    private Conference $conference;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $photoFilename = null;
 
     public function getId(): ?int
     {
@@ -40,7 +43,7 @@ class Comment
         return $this->author;
     }
 
-    public function setAuthor(string $author): static
+    public function setAuthor(string $author): self
     {
         $this->author = $author;
 
@@ -52,7 +55,7 @@ class Comment
         return $this->text;
     }
 
-    public function setText(string $text): static
+    public function setText(string $text): self
     {
         $this->text = $text;
 
@@ -64,7 +67,7 @@ class Comment
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -76,7 +79,7 @@ class Comment
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -88,9 +91,21 @@ class Comment
         return $this->conference;
     }
 
-    public function setConference(?Conference $conference): static
+    public function setConference(?Conference $conference): self
     {
         $this->conference = $conference;
+
+        return $this;
+    }
+
+    public function getPhotoFilename(): ?string
+    {
+        return $this->photoFilename;
+    }
+
+    public function setPhotoFilename(?string $photoFilename): self
+    {
+        $this->photoFilename = $photoFilename;
 
         return $this;
     }
