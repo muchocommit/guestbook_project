@@ -85,9 +85,9 @@ class Comment
     }
 
     #[ORM\PrePersist]
-    public function setCreatedAt(): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = $createdAt;
 
         return $this;
     }
